@@ -25,7 +25,7 @@ SECRET_KEY = 'fsm_cu1_kk#*-5n5s@#1kh2)9e@dvf=gwix$ieq(xdw#^h)&1+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '<your_username>.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'bravmech.pythonanywhere.com']
 
 
 # Application definition
