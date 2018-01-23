@@ -25,7 +25,7 @@ SECRET_KEY = 'fsm_cu1_kk#*-5n5s@#1kh2)9e@dvf=gwix$ieq(xdw#^h)&1+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bravmech.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bravmech.pythonanywhere.com', '.herokuapp.com']
 
 
 # Application definition
@@ -83,10 +83,10 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'djangogirls',
-        'USER': 'bravmi',
-        'PASSWORD': 'wordpass',
+        'USER': 'name',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -132,3 +132,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOGIN_REDIRECT_URL = '/'
+
+# heroku stuff
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
