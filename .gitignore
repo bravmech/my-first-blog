@@ -10,3 +10,5 @@ db.sqlite3
 
 .env
 .env.leave
+
+local_settings.py
