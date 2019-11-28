@@ -7,6 +7,7 @@ db.sqlite3
 .DS_Store
 
 *.sublime*
+*.code-workspace*
 
 .env
 .env.leave
