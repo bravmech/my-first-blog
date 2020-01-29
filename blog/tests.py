@@ -67,6 +67,15 @@ class PostTests(TestCase):
         self.assertContains(resp, post1.title)
         self.assertNotContains(resp, post2.title)
 
+        resp = self.client.get(reverse('post_edit', args=(post1.pk,)))
+        assert resp.status_code == 200
+        edited_title = 'edited title 1'
+        resp = self.client.post(reverse('post_edit', args=(post1.pk,)), data={'title': edited_title, 'text': post1.text}, follow=True)
+        import ipdb; ipdb.set_trace()
+        self.assertRedirects(resp, reverse('post_detail', args=(post1.pk,)))
+        self.assertContains(resp, edited_title)
+
+
     def test_comments(self):
         self.login()
 
