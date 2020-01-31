@@ -1,4 +1,3 @@
-
 import pytest
 
 from django.test import TestCase
@@ -9,7 +8,6 @@ from django.contrib.auth.models import User
 
 
 class PostTests(TestCase):
-
     def setUp(self):
         self.username = 'username'
         self.password = 'password'
@@ -70,11 +68,11 @@ class PostTests(TestCase):
         resp = self.client.get(reverse('post_edit', args=(post1.pk,)))
         assert resp.status_code == 200
         edited_title = 'edited title 1'
-        resp = self.client.post(reverse('post_edit', args=(post1.pk,)), data={'title': edited_title, 'text': post1.text}, follow=True)
-        import ipdb; ipdb.set_trace()
+        resp = self.client.post(
+            reverse('post_edit', args=(post1.pk,)), data={'title': edited_title, 'text': post1.text}, follow=True
+        )
         self.assertRedirects(resp, reverse('post_detail', args=(post1.pk,)))
         self.assertContains(resp, edited_title)
-
 
     def test_comments(self):
         self.login()
@@ -87,8 +85,12 @@ class PostTests(TestCase):
 
         resp = self.client.get(reverse('add_comment_to_post', args=(post.pk,)))
         assert resp.status_code == 200
-        self.client.post(reverse('add_comment_to_post', args=(post.pk,)), data={'author': 'author 1', 'text': 'text 1'})
-        self.client.post(reverse('add_comment_to_post', args=(post.pk,)), data={'author': 'author 2', 'text': 'text 2'})
+        self.client.post(
+            reverse('add_comment_to_post', args=(post.pk,)), data={'author': 'author 1', 'text': 'text 1'},
+        )
+        self.client.post(
+            reverse('add_comment_to_post', args=(post.pk,)), data={'author': 'author 2', 'text': 'text 2'},
+        )
         comment1, comment2 = Comment.objects.all()
 
         self.client.logout()
